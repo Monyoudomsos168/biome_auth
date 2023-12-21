@@ -1,39 +1,89 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# biome_auth
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+With this pack you can use the biometrics systems of Android and IOS devices.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+<br>
+It will ask for the user which the biometric authentication method  of his device, this can be FaceID or TouchID on IPhone or  FingerPrint on Android phone
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
-## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## How to use
 
 ```dart
-const like = 'sample';
+import 'package:native_auth/native_auth.dart';
+final response = await Auth.isAuthenticate();
+print(response.isAuthenticated); // true or false
 ```
 
-## Additional information
+`response` is an enum `AuthResult` containing the statuses:
+#### `error`, `auth` and `noAuth`
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+`auth` means the user is authenticated.<br>
+`noAuth` means the user is no authenticated.<br>
+`error` means that it was not possible to request any biometrics.
+
+## 📱Screenshots
+
+<h3 align="center">🤖 Android</h3>
+<p align="center">
+    <img src="https://gitlab.com/welitonsousa/images/-/raw/main/android-waiting.png" width="270" height="500"/>
+    <img src="https://gitlab.com/welitonsousa/images/-/raw/main/android-success.png" width="270" height="500"/>
+</p>
+
+<h3 align="center">🍎 IOS</h3>
+<p align="center">
+    <img src="https://gitlab.com/welitonsousa/images/-/raw/main/ios-waiting.png" width="270" height="500"/>
+    <img src="https://gitlab.com/welitonsousa/images/-/raw/main/ios-success.png" width="270" height="500"/>
+</p>
+
+## IOS Integration
+
+Update your project's `Info.plist` file to include the
+`FaceID` permissions:
+
+
+```xml
+<key>NSFaceIDUsageDescription</key>
+<string>Why is my app authenticating using face id?</string>
+```
+
+## Android Integration
+
+Update your project's `AndroidManifest.xml` file to include the
+`USE_FINGERPRINT` permissions:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+ package="com.example.app">
+  <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+<manifest>
+```
+
+Update your MainActivity.kt:
+
+```java
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity: FlutterFragmentActivity() {
+    // ...
+}
+```
+
+OR
+
+Update your MainActivity.java:
+
+```java
+import io.flutter.embedding.android.FlutterFragmentActivity;
+
+public class MainActivity extends FlutterFragmentActivity {
+    // ...
+}
+```
+to inherit `FlutterActivity` from `FlutterFragmentActivity`
+
+<br>
+
+<p align="center">
+   Feito com ❤️ by <a target="_blank" href="https://github.com/Monyoudomsos168/biome_auth"><b>Oudom 168</b></a>
+</p>
